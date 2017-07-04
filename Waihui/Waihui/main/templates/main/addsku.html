@@ -1,0 +1,25 @@
+{% extends "main/base.html" %}
+{% load i18n %} 
+{% get_current_language as LANGUAGE_CODE %}
+{% block title %}
+    {{heading}}
+{% endblock title %}
+
+{% block content %}
+    <h1>{{heading}}</h1>
+    {% trans "This the content of booking a course page." %}
+    
+    {% if uf %}
+        <form method="post" enctype="multipart/form-data" action="{% url 'main:addsku' %}">
+        {{uf.as_p}}
+        {% csrf_token %}
+        <input type="submit" name="submit">
+    </form>
+    {% endif %}
+    
+    <p>================================</p>
+    <p>{{msg}}</p>
+    <p>================================</p>
+
+        
+{% endblock content %}

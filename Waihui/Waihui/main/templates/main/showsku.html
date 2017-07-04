@@ -1,0 +1,136 @@
+{% extends "main/base.html" %}
+{% load i18n %} 
+{% get_current_language as LANGUAGE_CODE %}
+{% block title %}
+    {{heading}}
+{% endblock title %}
+
+{% block content %}
+    <h1>{{heading}}</h1>
+    {% trans "This the content of replying to sku." %}
+    {{result}}
+    <p>================================</p>
+    <p>{{msg}}</p>
+    <p>================================</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Topic</th>
+                    <th>Status</th> 
+                    <th>Provider</th>
+                    <th>Buyer</th>
+                    <th>Start time</th>
+                    <th>End time</th>
+                    <th>Created</th>
+                    <th>Modified</th>
+                    {% if is_provider == 1 %}
+                        <th>Score</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{sku.topic}}</td>
+                    <td>{{sku.status}}({{sku.get_status_display}})</td>
+                    <td>{{sku.provider}}</td>
+                    <td>{{sku.buyer.all|safeseq|join:", "}}</td>
+                    <td>{{sku.start_time}}</td>
+                    <td>{{sku.end_time}}</td>
+                    <td>{{sku.created}}</td>
+                    <td>{{sku.modified}}</td>
+                    {% if is_provider == 1 %}
+                        <th>{{sku.reviewtoprovider.score}}</th>
+                    {% endif %}
+                </tr>
+            </tbody>
+        </table>
+    <p>================================</p>
+    {% if sku.has_plan %}
+    <p>Plans on this SKU</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Topic</th>
+                    <th>Content</th>
+                    <th>Assignment</th>
+                    <th>Slides</th>
+                    <th>Materiallinks</th>
+                    <th>Materialhtml</th>
+                    <th>Voc</th>
+                    <th>Copy_from</th>
+                    <th>Sumy</th>
+                    <th>Roomlink</th>
+                    <th>Created</th>
+                    <th>Modified</th>
+                </tr>
+            </thead>
+            <tbody>
+                {# {% for plan in plans %} #}
+                <tr>
+                    <td>{{sku.plan.topic}}</td>
+                    <td>{{sku.plan.content}}</td>
+                    <td>{{sku.plan.assignment}}</td>
+                    <td>{{sku.plan.slides}}</td>
+                    <td>{{sku.plan.materiallinks}}</td>
+                    <td>{{sku.plan.materialhtml}}</td>
+                    <td>{{sku.plan.voc}}</td>
+                    <td>{{sku.plan.copy_from}}</td>
+                    <td>{{sku.plan.sumy}}</td>
+                    <td>{{sku.plan.roomlink}}</td>
+                    <td>{{sku.plan.created}}</td>
+                    <td>{{sku.plan.modified}}</td>
+                </tr>
+                {# {% endfor %} #}
+            </tbody>
+        </table>
+        <a href="{% url 'main:modifyplan' sku.plan.id %}">{% trans "Modify this plan" %}</a>
+    {% elif is_provider %}
+    <a href="{% url 'main:addplan' sku.id %}">{% trans "Accept this sku, Add a Plan to this SKU" %}</a>
+    {% else %}
+    <p>No Plans right now</p>
+    {% trans "Waiting an unique plan fits buyer's level" %}
+    {% endif %}
+    <p>================================</p>
+    {% if rtss %}
+        
+    <p>Replys to This SKU</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Type</th>
+                    <th>Content</th>
+                    <th>Created</th>
+                    <th>Modified</th>
+                </tr>  
+            </thead>
+            <tbody>
+                {% for rts in rtss %}    
+                <tr>
+                    <td>{{rts.user}}</td>
+                    <td>{{rts.type}}</td>
+                    <td>{{rts.content}}</td>
+                    <td>{{rts.created}}</td>
+                    <td>{{rts.modified}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+    <p>No comments right now</p>
+        {% if is_involved %}
+        <a href="{% url 'main:replyrts' sku.id %}">{% trans "Add a reply" %}</a>
+        {% else %}
+        {% trans "You are not involved in this class, so you can't leave comments" %}
+        {% endif %}
+    {% endif %}
+
+    <p>================================</p>
+    {% if sku.status == 8 %}
+        <p><a href="{% url 'main:feedback_sku' sku.id %}">Give a Feedback</a></p>
+    {% endif %}
+    
+
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends "main/base.html" %}
+{% load i18n %} 
+{% load tz %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_timezone as TIME_ZONE %}
+{% localtime on %}
+{% block title %}
+    {{heading}}
+{% endblock title %}
+{% block content %}
+    <h1>{{heading}}</h1>
+    {% trans "When you want to cancel this class, You should want for the provider response." %}
+    {% if uf %}
+        <form method="post" enctype="multipart/form-data" >
+        {% csrf_token %}
+        <input type="submit" name="submit">
+        </form>
+    {% endif %}
+    <p>================================</p>
+    <p>{{msg}}</p>
+    <p>================================</p>
+{% endblock content %}
+{% endlocaltime %}

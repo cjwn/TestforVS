@@ -1,0 +1,14 @@
+{% extends "main/base.html" %}
+{% load i18n %} 
+{% get_current_language as LANGUAGE_CODE %}
+{% block title %}
+    {{heading}}
+{% endblock title %}
+
+{% block content %}
+    <h1>{{heading}}</h1>
+    <p>================================</p>
+    <p>{{msg}}</p>
+    <p>================================</p>
+    <p>back to <a href="{% url 'main:orderlist' %}">order list</a></p>
+{% endblock content %}

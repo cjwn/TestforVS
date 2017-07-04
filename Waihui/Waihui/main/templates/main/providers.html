@@ -1,0 +1,36 @@
+{% extends "main/base.html" %}
+{% load i18n %} 
+{% load tz %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_timezone as TIME_ZONE %}
+{% localtime on %}
+{% block title %}
+    {{heading}}
+{% endblock title %}
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <td>[USER ID]</td>
+                <td>[PROVIDER ID]</td>
+                <td>{% trans "头像" %}</td>
+                <td>{% trans "名称" %}</td>  
+                {# <td>{% trans "自我评价" %}</td> #}
+                {# <td>{% trans "已教课时" %}</td>  #}
+            </tr>
+        </thead>
+        <tbody>
+                {% for provider in providers %}    
+            <tr>
+                <td>{{provider.user.id}}</td>
+                <td>{{provider.id}}</td>
+                <td>{{provider.avatar}}</td>
+                <td>{{provider.name}}</td>
+                {# <td>{{provider.bio}}</td> #}
+                {# <td>{{finished_skus_count}}</td> #}
+            </tr>
+                {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
+{% endlocaltime %}

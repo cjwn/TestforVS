@@ -1,0 +1,22 @@
+{% extends "main/base.html" %}
+{% load i18n %} 
+{% get_current_language as LANGUAGE_CODE %}
+{% block title %}
+    {{heading}}
+{% endblock title %}
+{% block content %}
+    <p>===================</p>
+    <p>{{result}}</p>
+    <p>===================</p>
+    {% if provider.avatar %}
+        <h2>Your current avatar</h2>
+        <p>It's beautiful, uh?</p>
+        <img src="{{provider.avatar.url}}" width="200px" alt="">
+    {% endif %}
+    <h2>Whatever, need a new avatar today?</h2>
+    <form method="post" enctype="multipart/form-data">
+        {{uf.as_p}}
+        {% csrf_token %}
+        <input type="submit" name="submit">
+    </form>
+{% endblock content %}

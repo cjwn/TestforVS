@@ -1,0 +1,24 @@
+{% extends "main/base.html" %}
+{% load i18n %}
+
+{% block title %}
+    
+{% endblock title %}
+
+{% block content %}
+
+    <a href="{% url 'main:signup' %}">{% trans "免费注册" %}</a>
+    {% if next %}
+    <p>{% trans "说实在的，你需要登录才能访问 " %}{{ next }}</p>
+    <form method="post" enctype="multipart/form-data" action="/login/?next={{next}}">
+    {%else%}
+    <p>{% trans "Welcome Back" %}</p>
+    <form method="post" enctype="multipart/form-data" action="/login/">
+    {% endif %}
+        {{uf.username}}
+        {{uf.password}}
+        {% csrf_token %}
+        <input type="submit" name="submit">
+    </form>
+    {{msg}}
+{% endblock content %}

@@ -1,0 +1,29 @@
+{% extends "main/base.html" %}
+{% load i18n %} 
+{% get_current_language as LANGUAGE_CODE %}
+{% block title %}
+    {{heading}}
+{% endblock title %}
+
+{% block content %}
+    <h1>{{heading}}</h1>
+    <ul>
+        <li>Order
+            <ul>
+                <li>ID:{{order.id}}</li>
+                <li>Status:{{order.get_status_display}}</li>
+            </ul>
+        
+        <li>SKU({{order.skus.all|length}}):</li>
+        {% for sku in order.skus.all %}
+            <ol>
+                <li><a href="{% url 'main:showsku' sku.id %}">SKU:{{sku}}</a>
+                    <ul>
+                        <li>Buyer:{% for buyer in sku.buyer.all %}{{buyer.nickname}}{% endfor %}</li>
+                    </ul>
+                </li>
+            </ol>
+        {% endfor %}
+    </ul>
+    <h2>{% trans "Book another course" %} <a href="{% url 'main:picktopic' %}">{% trans "GO!" %}</a></h2>
+{% endblock content %}

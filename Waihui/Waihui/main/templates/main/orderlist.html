@@ -1,0 +1,80 @@
+{% extends "main/base.html" %}
+{% load i18n %} 
+{% load tz %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_timezone as TIME_ZONE %}
+
+{% block title %}
+    My Order
+{% endblock title %}
+
+{% block content %}
+    <h1>{% trans "My Order" %}</h1>
+    {% trans "Welcome back. China never leave." %}
+        <h2>* User profile</h2>
+        <ul style="font-family:monospace;">
+            <li>login name: {{info.current_user.get_username}}</li>
+            <li>email: {{info.current_user.email}}</li>
+            <li>last login: {{info.current_user.last_login|date:"Y-m-d H:i:s (O)"}}</li>
+            <li>wallet balance: CNY {{info.current_user.wallet.cny_balance}}</li>
+            <li>as a student:</li>
+            <ul>
+                <li>nickname: {{info.current_user.buyer.nickname}}</li>
+                <li>preferred language: {{info.current_user.buyer.mother_tongue.english_name|language_name}}</li>
+                <li>learning: {{info.current_user.buyer.sku_set.all|length}} courses</li>
+            </ul>
+            <li>as a tutor:</li>
+            <ul>
+                <li>stage name (for tutoring): {{info.current_user.provider.name}}</li>
+                <li>tutoring status: {{info.current_user.provider.get_status_display}}</li>
+                <li>tutoring: {{info.current_user.provider.sku_set.all|length}} courses</li>
+            </ul>
+            <li>DateTime: {{timezone_now}}</li>
+        </ul>
+        <h2>* As a student, you have {{info.current_user.buyer.order_set.all|length}} orders, and {{orders_to_pay_list|length}} orders is waiting to pay.</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Order</th>
+                    <th>Timeflag</th>
+                    {# <th>TimeDelta</th> #}
+                    <th>ID</th>
+                    <th>Provider</th>
+                    <th>status</th>
+                    <th>Created</th>
+                    <th>Paid time</th>
+                    <th>Modified</th>
+                    <th>OP</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders|dictsort:"created" %}
+                <tr>
+                    <td><a href="{% url 'main:showorder' order.id %}">{{order}}</a></td>
+                    <td>
+                        {% if order.payment_timeflag == 'should_pay_soon' %}
+                            <strong>SOON-countdown: <br/ >{{order.time_to_pay_24hours}}</strong>
+                        {% else %}
+                            {{order.payment_timeflag}}
+                        {% endif %}
+                    </td>
+                    {# <td>{{order.timedelta}}</td> #}
+                    <td>{{order.id}}</td>
+                    <td>{{order.provider}}</td>
+                    <td>{{order.status}}({{order.get_status_display}})</td>
+                    <td>{{order.created|date:"Y-m-d H:i (e)"}}</td>
+                    <td>{{order.paid_time|date:"Y-m-d H:i (e)"}}</td>
+                    <td>{{order.modified|date:"Y-m-d H:i (e)"}}</td>
+                    <td>{% if not order.sku_is_past %}
+                            {% if order.status == 1 %}
+                                <strong><a href="{% url 'main:showorder' order.id %}">[Pay!]</a></strong>
+                            {% endif %}
+                        {% else %}
+                            <strong>[sku_missed]</strong>
+                    {% endif %}</td>
+                </tr>
+                {% endfor%}
+            </tbody>
+        </table>
+
+{% endblock content %}

@@ -1,0 +1,94 @@
+{% extends "main/base.html" %}
+{% load i18n %} 
+{% load tz %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_timezone as TIME_ZONE %}
+
+{% block title %}
+    My Dashboard
+{% endblock title %}
+
+{% block content %}
+    <h1>{% trans "My Dashboard" %}</h1>
+    {% trans "Welcome back. China never leave." %}
+        <h2>* User profile</h2>
+        <ul style="font-family:monospace;">
+            <li>login name: {{info.current_user.get_username}}</li>
+            <li>email: {{info.current_user.email}}</li>
+            <li>last login: {{info.current_user.last_login|date:"Y-m-d H:i:s (O)"}}</li>
+            <li>wallet balance: CNY {{info.current_user.wallet.cny_balance}}</li>
+            <li>as a student:</li>
+            <ul>
+                <li>nickname: {{info.current_user.buyer.nickname}}</li>
+                <li>preferred language: {{info.current_user.buyer.mother_tongue.english_name|language_name}}</li>
+                <li>learning: {{info.current_user.buyer.sku_set.all|length}} courses</li>
+            </ul>
+            <li>as a tutor:</li>
+            <ul>
+                <li>stage name (for tutoring): {{info.current_user.provider.name}}</li>
+                <li>tutoring status: {{info.current_user.provider.get_status_display}}</li>
+                <li>tutoring: {{info.current_user.provider.sku_set.all|length}} courses</li>
+            </ul>
+        </ul>
+        <h2>* {% trans "Learning courses" %} <a href="{% url 'main:addsku' %}"><i><small>book a new course</small></i></a></h2>
+        <strong>As a student</strong>, you have {{info.current_user.buyer.sku_set.all|length}} courses and {{info.current_user.buyer.order_set.all|length}} <a href="{% url 'main:orderlist' %}">orders</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Topic</th>
+                    <th>Timeflag</th>
+                    <th>ID</th>
+                    <th>Provider</th>
+                    <th>status</th>
+                    <th>Has plan?</th>
+                    <th>Buyer</th>
+                    <th>Start time</th>
+                    <th>End time</th>
+                    <th>Created</th>
+                    <th>Modified</th>
+                    <th>OP</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sku in skus|dictsort:"start_time" %}
+                <tr>
+                    <td><a href="{% url 'main:showsku' sku.id %}">{{sku.topic}}</a></td>
+                    <td>
+                        {% if sku.is_start_later %}
+                            waiting...
+                        {% elif sku.is_start_soon %}
+                            <strong>SOON-countdown: <br/ >{{sku.time_to_start}}</strong>
+                        {% elif sku.is_should_in_progress%}
+                            NOW
+                        {% elif sku.is_past%}
+                            past
+                        {% endif %}
+                    </td>
+                    <td>{{sku.id}}</td>
+                    <td>{{sku.provider}}</td>
+                    <td>{{sku.status}}({{sku.get_status_display}})</td>
+                    <td>
+                        {% if sku.has_plan %}
+                            yes
+                        {% else %}
+                            <strong>NO</strong>
+                        {% endif %}
+                    </td>
+                    <td>{{sku.buyer.all|safeseq|join:", "}}</td>
+                    <td>{{sku.start_time|date:"Y-m-d H:i (e)"}}</td>
+                    <td>{{sku.end_time|date:"Y-m-d H:i (e)"}}</td>
+                    <td>{{sku.created|date:"Y-m-d H:i (e)"}}</td>
+                    <td>{{sku.modified|date:"Y-m-d H:i (e)"}}</td>
+                    <td><a href="{% url 'main:buyer_cancel_sku' sku.id %}">[CANCEL]</a>
+                    {% if sku.has_plan and sku.status == 6 and not sku.is_past %}
+                        <strong><a href="{% url 'main:buyer_ready_sku' sku.id%}">[Ready!]</a></strong>
+                    {% elif sku.status == 7 and not sku.is_past %}
+                        <strong><a href="{% url 'main:showsku' sku.id %}">[ENTER!]</a></strong>
+                    {% endif %}
+                    </td>
+                </tr>
+                {% endfor%}
+            </tbody>
+        </table>
+
+{% endblock content %}

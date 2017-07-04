@@ -1,0 +1,50 @@
+{% extends "main/base.html" %}
+{% load i18n %} 
+{% load tz %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_timezone as TIME_ZONE %}
+
+{% block title %}
+    Add Order
+{% endblock title %}
+
+{% block content %}
+    <h1>{% trans "Add a order" %}</h1>
+    {% trans "努力多一点,付出多一点,成功就会近一点" %}
+        <h2>Sku details</h2>
+        <p>================================</p>
+        <ul>
+            <li>{{msg}}</li>
+            <li>Go back to <a href="{% url 'main:dashboard' %}">dashboard </a></li>
+        </ul>
+        <p>================================</p>
+        <form method="post" enctype="multipart/form-data" action="{% url 'main:addorder' %}">
+            {{uf.as_p}}
+            {% csrf_token %}
+        <input type="submit" name="submit">
+        </form>
+        <p>================================</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Topic</th>
+                    <th>Provider</th>
+                    <th>Status</th>
+                    <th>Start_time</th>
+                    <th>End_time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sku in info.current_user.buyer.sku_set.all %}
+                 <tr>
+                    <td>{{sku.topic}}</td>
+                    <td>{{sku.provider}}</td>
+                    <td>{{sku.status}}</td>
+                    <td>{{sku.start_time}}</td>
+                    <td>{{sku.end_time}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+{% endblock content %}

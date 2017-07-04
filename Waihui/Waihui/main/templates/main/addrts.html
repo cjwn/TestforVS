@@ -1,0 +1,53 @@
+{% extends "main/base.html" %}
+{% load i18n %} 
+{% get_current_language as LANGUAGE_CODE %}
+{% block title %}
+    {{heading}}
+{% endblock title %}
+
+{% block content %}
+    <h1>{{heading}}</h1>
+    {% trans "This the content of replying to sku." %}
+    
+    <p>================================</p>
+    <ul>
+        <li>{{msg}}</li>
+        <li>Go back to SKU <a href="{% url 'main:showsku' sku_id %}">#{{sku_id}}</a></li>
+    </ul>
+    <p>================================</p>
+
+
+    <form method="post" enctype="multipart/form-data" action="{% url 'main:replyrts' sku_id %}">
+        {{uf.as_p}}
+        {% csrf_token %}
+        <input type="submit" name="submit">
+    </form>
+
+<!--
+        <table>
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Type</th>
+                    <th>Content</th>
+                    <th>Rply to</th>
+                    <th>Created</th>
+                    <th>Modified</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in rtss %}
+                <tr>
+                    <td>{{r.user}}</td>
+                    <td>{{r.type}}</td>
+                    <td>{{r.content}}</td>
+                    <td>{{r.reply_to}}</td>
+                    <td>{{r.created}}</td>
+                    <td>{{r.modified}}</td>
+
+                </tr>
+                {% endfor%}
+            </tbody>
+        </table>
+!-->
+{% endblock content %}

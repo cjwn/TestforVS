@@ -1,0 +1,31 @@
+{% extends "main/base.html" %}
+{% load i18n %} 
+{% load tz %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_timezone as TIME_ZONE %}
+{% localtime on %}
+{% block title %}
+    {{heading}}
+{% endblock title %}
+{% block content %}
+    <h1>{{heading}}</h1>
+    {% trans "This the content of booking a course page." %}
+    <p>================================</p>
+    <p>{{msg}}</p>
+    <p>{{typesku}}</p>
+    <p>================================</p>
+    {% if uf %}
+        <form method="post" enctype="multipart/form-data">
+        <ul>
+            <li>sku.id: {{sku.id}}</li>
+            <li>sku.status: {{sku.status}}</li>
+            <li>name of the topic: {{topic.name}}</li>
+            <li>topic id: {{topic.id}}</li>
+        </ul>
+        {% csrf_token %}
+        <input type="submit" name="submit">
+        </form>
+    {% endif %}
+    <strong><p>*{% trans "once you click submit, an order will be made." %}</p></strong>
+{% endblock content %}
+{% endlocaltime %}

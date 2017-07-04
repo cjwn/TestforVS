@@ -1,0 +1,20 @@
+{% extends "main/base.html" %}
+{% load i18n %} 
+{% load tz %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_timezone as TIME_ZONE %}
+{% localtime on %}
+
+{% block title %}
+    {{heading}}
+
+{% endblock title %}
+
+{% block content %}
+    <h1>{{heading}}</h1>
+    <p>================================</p>
+    <p>{{msg}}</p>
+    <p>================================</p>
+{% endblock content %}
+
+{% endlocaltime %}

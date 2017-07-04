@@ -1,0 +1,21 @@
+{% extends "main/base.html" %}
+{% load i18n %} 
+{% load tz %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_timezone as TIME_ZONE %}
+{% localtime on %}
+{% block title %}
+    {{heading}}
+{% endblock title %}
+{% block content %}
+    <h1>You're going to learn 
+    {{sku.provider.name}}' course: {{sku.topic}}</h1>
+    {% if sku.roomlink %}
+        <p>Please comfirm your course link</p>
+        {{sku.roomlink}}
+    {% endif %}
+    <p>=====================================================</p>
+    {{msg}}
+    <p>=====================================================</p>
+{% endblock content %}
+{% endlocaltime %}

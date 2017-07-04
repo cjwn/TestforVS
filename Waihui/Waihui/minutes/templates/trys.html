@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}
+    {{entry.title}}
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="page-header">
+                <h1>{{ entry.title }} <br/> <small>{{ entry.start_time }}</small></h1>
+            </div>
+            <h2>测试元素</h2>
+                <p>profile:{{entry.attendees.all}}</p>
+                <p>profile_set:{% for profile in profile_set %}{{profile.display_name}}{% if profile_set.count > 1 %};{% endif %}
+                {% endfor %}</p>
+                <p>display_name:{{entry.display_name.all}}</p>
+                <p>attended_entries:{{entry.attended_entries.all}}</p>
+            <h2>本体变量</h2>
+                <p>attended_entrie:{{attended_entrie}}</p>
+                <p>test_field:{{test_field}}</p>
+                <p>profile_set:{{profile_set}}</p>
+        </div>
+    </div>
+</div>
+{% endblock content %}

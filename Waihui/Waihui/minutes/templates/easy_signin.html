@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}
+    {{entry.title}}
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="page-header">
+                <h1>{{ entry.title }} <br/> <small>{{ entry.start_time }}</small></h1>
+            </div>
+            <h2>{{result}}</h2>
+            <div class="well">
+                <form enctype="multipart/form-data" method="post">
+                    {{uf.as_p}}
+                    {% csrf_token %}
+                    <input type="submit" name="submit">
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
+{% endblock content %}

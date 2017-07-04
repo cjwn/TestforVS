@@ -1,0 +1,16 @@
+{% extends "main/base.html" %}
+{% load i18n %}
+
+{% block head %}
+    {{section.title}}
+{% endblock head %}
+{% block content %}
+    <p>Good, rarely right in your life</p>
+    
+    <ul>
+        <li><a href="{% url 'main:home' %}"</a>{% trans "Go back home" %}</li>
+        <li><a href="{% url 'main:skulist' %}">{% trans "SKU List" %}</a></li>
+        <li><a href="{% url 'main:addsku' %}">{% trans "Add SKU" %}</a></li>
+    </ul>
+
+{% endblock content %}

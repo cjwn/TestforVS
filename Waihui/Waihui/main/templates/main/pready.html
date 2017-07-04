@@ -1,0 +1,25 @@
+{% extends "main/base.html" %}
+{% load i18n %} 
+{% load tz %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_timezone as TIME_ZONE %}
+{% localtime on %}
+{% block title %}
+    {{heading}}
+{% endblock title %}
+{% block content %}
+    <h1>You're going to teach 
+    {% for buyer in sku.buyer.all %}
+        {{buyer}} 
+    {% endfor %} the {{sku.topic}}</h1>
+    <p>Please comfirm your course link</p>
+    <p>=====================================================</p>
+    {{msg}}
+    <p>=====================================================</p>
+    <form method="POST" enctype="multipart/form-data">
+        {{uf.roomlink}}
+        {% csrf_token %}
+        <input type="submit" name="submit">
+    </form>
+{% endblock content %}
+{% endlocaltime %}

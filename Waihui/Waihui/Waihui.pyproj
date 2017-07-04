@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <Name>Waihui</Name>
+    <RootNamespace>Waihui</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>2064dc16-ada0-416c-aef3-c930f953fba4</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectTypeGuids>{5F0BE9CA-D677-4A4D-8806-6076C0FAAD37};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <StartupFile>manage.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <LaunchProvider>Django launcher</LaunchProvider>
+    <DjangoSettingsModule>Waihui.settings</DjangoSettingsModule>
+    <OutputPath>.</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="main\act.py" />
+    <Compile Include="main\admin.py" />
+    <Compile Include="main\ds.py" />
+    <Compile Include="main\ds_views.py" />
+    <Compile Include="main\forms.py" />
+    <Compile Include="main\management\commands\__init__.py" />
+    <Compile Include="main\management\__init__.py" />
+    <Compile Include="main\migrations\0001_initial.py" />
+    <Compile Include="main\migrations\0002_sku_buyer.py" />
+    <Compile Include="main\migrations\0003_auto_20150609_0107.py" />
+    <Compile Include="main\migrations\0004_auto_20150610_2015.py" />
+    <Compile Include="main\migrations\0005_auto_20150614_2009.py" />
+    <Compile Include="main\migrations\0006_auto_20150621_2257.py" />
+    <Compile Include="main\migrations\0007_auto_20150815_0904.py" />
+    <Compile Include="main\migrations\0008_auto_20151007_0357.py" />
+    <Compile Include="main\migrations\0009_auto_20151107_0440.py" />
+    <Compile Include="main\migrations\0010_auto_20151115_0941.py" />
+    <Compile Include="main\migrations\0011_replytosku_sku.py" />
+    <Compile Include="main\migrations\0012_notification.py" />
+    <Compile Include="main\migrations\0013_auto_20151212_1217.py" />
+    <Compile Include="main\migrations\0014_auto_20151219_0838.py" />
+    <Compile Include="main\migrations\0015_auto_20151219_0839.py" />
+    <Compile Include="main\migrations\0016_auto_20160227_0702.py" />
+    <Compile Include="main\migrations\0017_auto_20160424_0823.py" />
+    <Compile Include="main\migrations\0018_auto_20160424_0958.py" />
+    <Compile Include="main\migrations\0019_auto_20160430_1701.py" />
+    <Compile Include="main\migrations\0020_auto_20160604_1114.py" />
+    <Compile Include="main\migrations\0021_auto_20160710_1315.py" />
+    <Compile Include="main\migrations\0022_mit_attendance.py" />
+    <Compile Include="main\migrations\0023_delete_mit_attendance.py" />
+    <Compile Include="main\migrations\0024_auto_20170119_1707.py" />
+    <Compile Include="main\migrations\0025_auto_20170203_1013.py" />
+    <Compile Include="main\migrations\0026_auto_20170205_1200.py" />
+    <Compile Include="main\migrations\0027_auto_20170206_1305.py" />
+    <Compile Include="main\migrations\0028_auto_20170206_1327.py" />
+    <Compile Include="main\migrations\0029_log_order.py" />
+    <Compile Include="main\migrations\0030_auto_20170206_1426.py" />
+    <Compile Include="main\migrations\0031_auto_20170206_1430.py" />
+    <Compile Include="main\migrations\0032_order_sku_topic_buyer.py" />
+    <Compile Include="main\migrations\0033_auto_20170208_2224.py" />
+    <Compile Include="main\migrations\0034_auto_20170208_2226.py" />
+    <Compile Include="main\migrations\__init__.py" />
+    <Compile Include="main\models.py" />
+    <Compile Include="main\tests.py" />
+    <Compile Include="main\test_data.py" />
+    <Compile Include="main\test_urls.py" />
+    <Compile Include="main\test_views.py" />
+    <Compile Include="main\urls.py" />
+    <Compile Include="main\url_views.py" />
+    <Compile Include="main\__init__.py" />
+    <Compile Include="manage.py" />
+    <Compile Include="minutes\acts.py" />
+    <Compile Include="minutes\admin.py" />
+    <Compile Include="minutes\apps.py" />
+    <Compile Include="minutes\forms.py" />
+    <Compile Include="minutes\migrations\0001_initial.py" />
+    <Compile Include="minutes\migrations\0002_profile_user.py" />
+    <Compile Include="minutes\migrations\0003_entry_end_time.py" />
+    <Compile Include="minutes\migrations\0004_auto_20160927_2010.py" />
+    <Compile Include="minutes\migrations\0005_profile_entry.py" />
+    <Compile Include="minutes\migrations\0006_auto_20161004_2218.py" />
+    <Compile Include="minutes\migrations\0007_auto_20161018_1445.py" />
+    <Compile Include="minutes\migrations\0008_auto_20161018_1601.py" />
+    <Compile Include="minutes\migrations\0009_auto_20161018_1607.py" />
+    <Compile Include="minutes\migrations\0010_auto_20161018_1630.py" />
+    <Compile Include="minutes\migrations\0011_auto_20161018_1646.py" />
+    <Compile Include="minutes\migrations\0012_auto_20161018_1648.py" />
+    <Compile Include="minutes\migrations\0013_auto_20161018_1746.py" />
+    <Compile Include="minutes\migrations\0014_auto_20161018_1807.py" />
+    <Compile Include="minutes\migrations\0015_auto_20161018_1809.py" />
+    <Compile Include="minutes\migrations\0016_auto_20161018_1844.py" />
+    <Compile Include="minutes\migrations\0017_auto_20161018_1906.py" />
+    <Compile Include="minutes\migrations\0018_auto_20161018_1925.py" />
+    <Compile Include="minutes\migrations\0019_auto_20161019_1716.py" />
+    <Compile Include="minutes\migrations\__init__.py" />
+    <Compile Include="minutes\models.py" />
+    <Compile Include="minutes\statics.py" />
+    <Compile Include="minutes\tests.py" />
+    <Compile Include="minutes\urls.py" />
+    <Compile Include="minutes\views.py" />
+    <Compile Include="minutes\__init__.py" />
+    <Compile Include="Waihui\__init__.py" />
+    <Compile Include="Waihui\settings.py" />
+    <Compile Include="Waihui\urls.py" />
+    <Compile Include="Waihui\wsgi.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="main\act.pyc" />
+    <Content Include="main\admin.pyc" />
+    <Content Include="main\ds.pyc" />
+    <Content Include="main\forms.pyc" />
+    <Content Include="main\locale\zh\LC_MESSAGES\django.mo" />
+    <Content Include="main\locale\zh\LC_MESSAGES\django.po" />
+    <Content Include="main\media\minutes\files\0904-0905-阿拉恰特 中文_20160710222555_204.pdf" />
+    <Content Include="main\media\None\a.png" />
+    <Content Include="main\media\provider_avatars\2016\05\29\ed234da7841ab907325d0c8be62c3b6f.jpg" />
+    <Content Include="main\migrations\0001_initial.pyc" />
+    <Content Include="main\migrations\0002_sku_buyer.pyc" />
+    <Content Include="main\migrations\0003_auto_20150609_0107.pyc" />
+    <Content Include="main\migrations\0004_auto_20150610_2015.pyc" />
+    <Content Include="main\migrations\0005_auto_20150614_2009.pyc" />
+    <Content Include="main\migrations\0006_auto_20150621_2257.pyc" />
+    <Content Include="main\migrations\0007_auto_20150815_0904.pyc" />
+    <Content Include="main\migrations\0008_auto_20151007_0357.pyc" />
+    <Content Include="main\migrations\0009_auto_20151107_0440.pyc" />
+    <Content Include="main\migrations\0010_auto_20151115_0941.pyc" />
+    <Content Include="main\migrations\0011_replytosku_sku.pyc" />
+    <Content Include="main\migrations\0012_notification.pyc" />
+    <Content Include="main\migrations\0013_auto_20151212_1217.pyc" />
+    <Content Include="main\migrations\0014_auto_20151219_0838.pyc" />
+    <Content Include="main\migrations\0015_auto_20151219_0839.pyc" />
+    <Content Include="main\migrations\0016_auto_20160227_0702.pyc" />
+    <Content Include="main\migrations\0017_auto_20160424_0823.pyc" />
+    <Content Include="main\migrations\0018_auto_20160424_0958.pyc" />
+    <Content Include="main\migrations\0019_auto_20160430_1701.pyc" />
+    <Content Include="main\migrations\0020_auto_20160604_1114.pyc" />
+    <Content Include="main\migrations\0021_auto_20160710_1315.pyc" />
+    <Content Include="main\migrations\0022_mit_attendance.pyc" />
+    <Content Include="main\migrations\0023_delete_mit_attendance.pyc" />
+    <Content Include="main\migrations\0024_auto_20170119_1707.pyc" />
+    <Content Include="main\migrations\0025_auto_20170203_1013.pyc" />
+    <Content Include="main\migrations\0026_auto_20170205_1200.pyc" />
+    <Content Include="main\migrations\0027_auto_20170206_1305.pyc" />
+    <Content Include="main\migrations\0028_auto_20170206_1327.pyc" />
+    <Content Include="main\migrations\0029_log_order.pyc" />
+    <Content Include="main\migrations\0030_auto_20170206_1426.pyc" />
+    <Content Include="main\migrations\0031_auto_20170206_1430.pyc" />
+    <Content Include="main\migrations\0032_order_sku_topic_buyer.pyc" />
+    <Content Include="main\migrations\0033_auto_20170208_2224.pyc" />
+    <Content Include="main\migrations\0034_auto_20170208_2226.pyc" />
+    <Content Include="main\migrations\__init__.pyc" />
+    <Content Include="main\models.pyc" />
+    <Content Include="main\static\bs\css\bootstrap-theme.css" />
+    <Content Include="main\static\bs\css\bootstrap-theme.css.map" />
+    <Content Include="main\static\bs\css\bootstrap-theme.min.css" />
+    <Content Include="main\static\bs\css\bootstrap.css" />
+    <Content Include="main\static\bs\css\bootstrap.css.map" />
+    <Content Include="main\static\bs\css\bootstrap.min.css" />
+    <Content Include="main\static\bs\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="main\static\bs\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="main\static\bs\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="main\static\bs\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="main\static\bs\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="main\static\bs\js\bootstrap.js" />
+    <Content Include="main\static\bs\js\bootstrap.min.js" />
+    <Content Include="main\static\bs\js\npm.js" />
+    <Content Include="main\static\css\minutes.css" />
+    <Content Include="main\static\js\entry_detail.js" />
+    <Content Include="main\static\js\jquery.js" />
+    <Content Include="main\static\js\vue-resource.min.js" />
+    <Content Include="main\static\js\vue.js" />
+    <Content Include="main\templates\main\addorder.html" />
+    <Content Include="main\templates\main\addplan.html" />
+    <Content Include="main\templates\main\addrts.html" />
+    <Content Include="main\templates\main\addsku.html" />
+    <Content Include="main\templates\main\base.html" />
+    <Content Include="main\templates\main\bready.html" />
+    <Content Include="main\templates\main\buyer_cancelsku.html" />
+    <Content Include="main\templates\main\dashboard.html" />
+    <Content Include="main\templates\main\error.html" />
+    <Content Include="main\templates\main\feedback_sku.html" />
+    <Content Include="main\templates\main\holdsku.html" />
+    <Content Include="main\templates\main\home.html" />
+    <Content Include="main\templates\main\login.html" />
+    <Content Include="main\templates\main\mytest.html" />
+    <Content Include="main\templates\main\my_profile.html" />
+    <Content Include="main\templates\main\notifications.html" />
+    <Content Include="main\templates\main\office.html" />
+    <Content Include="main\templates\main\office_backup.html" />
+    <Content Include="main\templates\main\ordercanceled.html" />
+    <Content Include="main\templates\main\orderlist.html" />
+    <Content Include="main\templates\main\orderpaid.html" />
+    <Content Include="main\templates\main\picktopic.html" />
+    <Content Include="main\templates\main\pready.html" />
+    <Content Include="main\templates\main\providers.html" />
+    <Content Include="main\templates\main\provider_profile.html" />
+    <Content Include="main\templates\main\provider_profile_avatar.html" />
+    <Content Include="main\templates\main\provider_profile_edit.html" />
+    <Content Include="main\templates\main\repickpool.html" />
+    <Content Include="main\templates\main\result.html" />
+    <Content Include="main\templates\main\right.html" />
+    <Content Include="main\templates\main\schedule.html" />
+    <Content Include="main\templates\main\showorder.html" />
+    <Content Include="main\templates\main\showsku.html" />
+    <Content Include="main\templates\main\signup.html" />
+    <Content Include="main\templates\main\skuintopic.html" />
+    <Content Include="main\templates\main\skulist.html" />
+    <Content Include="main\templates\main\test.html" />
+    <Content Include="main\test_views.pyc" />
+    <Content Include="main\urls.pyc" />
+    <Content Include="main\url_views.pyc" />
+    <Content Include="main\__init__.pyc" />
+    <Content Include="minutes\acts.pyc" />
+    <Content Include="minutes\admin.pyc" />
+    <Content Include="minutes\forms.pyc" />
+    <Content Include="minutes\migrations\0001_initial.pyc" />
+    <Content Include="minutes\migrations\0002_profile_user.pyc" />
+    <Content Include="minutes\migrations\0003_entry_end_time.pyc" />
+    <Content Include="minutes\migrations\0004_auto_20160927_2010.pyc" />
+    <Content Include="minutes\migrations\0005_profile_entry.pyc" />
+    <Content Include="minutes\migrations\0006_auto_20161004_2218.pyc" />
+    <Content Include="minutes\migrations\0007_auto_20161018_1445.pyc" />
+    <Content Include="minutes\migrations\0008_auto_20161018_1601.pyc" />
+    <Content Include="minutes\migrations\0009_auto_20161018_1607.pyc" />
+    <Content Include="minutes\migrations\0010_auto_20161018_1630.pyc" />
+    <Content Include="minutes\migrations\0011_auto_20161018_1646.pyc" />
+    <Content Include="minutes\migrations\0012_auto_20161018_1648.pyc" />
+    <Content Include="minutes\migrations\0013_auto_20161018_1746.pyc" />
+    <Content Include="minutes\migrations\0014_auto_20161018_1807.pyc" />
+    <Content Include="minutes\migrations\0015_auto_20161018_1809.pyc" />
+    <Content Include="minutes\migrations\0016_auto_20161018_1844.pyc" />
+    <Content Include="minutes\migrations\0017_auto_20161018_1906.pyc" />
+    <Content Include="minutes\migrations\0018_auto_20161018_1925.pyc" />
+    <Content Include="minutes\migrations\0019_auto_20161019_1716.pyc" />
+    <Content Include="minutes\migrations\__init__.pyc" />
+    <Content Include="minutes\models.pyc" />
+    <Content Include="minutes\statics.pyc" />
+    <Content Include="minutes\templates\base.html" />
+    <Content Include="minutes\templates\easy_signin.html" />
+    <Content Include="minutes\templates\entry_detail.html" />
+    <Content Include="minutes\templates\index.html" />
+    <Content Include="minutes\templates\qrcode_show.html" />
+    <Content Include="minutes\templates\trys.html" />
+    <Content Include="minutes\templates\trysqrcode_show.html" />
+    <Content Include="minutes\urls.pyc" />
+    <Content Include="minutes\views.pyc" />
+    <Content Include="minutes\__init__.pyc" />
+    <Content Include="requirements.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="main\" />
+    <Folder Include="main\locale\" />
+    <Folder Include="main\locale\zh\" />
+    <Folder Include="main\locale\zh\LC_MESSAGES\" />
+    <Folder Include="main\management\" />
+    <Folder Include="main\management\commands\" />
+    <Folder Include="main\media\" />
+    <Folder Include="main\media\minutes\" />
+    <Folder Include="main\media\minutes\files\" />
+    <Folder Include="main\media\None\" />
+    <Folder Include="main\media\provider_avatars\" />
+    <Folder Include="main\media\provider_avatars\2016\" />
+    <Folder Include="main\media\provider_avatars\2016\05\" />
+    <Folder Include="main\media\provider_avatars\2016\05\29\" />
+    <Folder Include="main\migrations\" />
+    <Folder Include="main\static\" />
+    <Folder Include="main\static\bs\" />
+    <Folder Include="main\static\bs\css\" />
+    <Folder Include="main\static\bs\fonts\" />
+    <Folder Include="main\static\bs\js\" />
+    <Folder Include="main\static\css\" />
+    <Folder Include="main\static\js\" />
+    <Folder Include="main\templates\" />
+    <Folder Include="main\templates\main\" />
+    <Folder Include="minutes\" />
+    <Folder Include="minutes\migrations\" />
+    <Folder Include="minutes\templates\" />
+    <Folder Include="Waihui\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Django.targets" />
+  <!-- Specify pre- and post-build commands in the BeforeBuild and 
+       AfterBuild targets below. -->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <AutoAssignPort>True</AutoAssignPort>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,91 @@
+{% extends "main/base.html" %}
+{% load i18n %} 
+{% load tz %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_timezone as TIME_ZONE %}
+
+{% block title %}
+    My Office
+{% endblock title %}
+
+{% block content %}
+    <h1>{% trans "My Office" %}</h1>
+    {% trans "On your desktop: books, a videocam, money you earned and the responsibility to popularize Chinese Languages." %}
+        <h2>* User profile</h2>
+        <ul style="font-family:monospace;">
+            <li>login name: {{info.current_user.get_username}}</li>
+            <li>email: {{info.current_user.email}}</li>
+            <li>last login: {{info.current_user.last_login|date:"Y-m-d H:i:s (O)"}}</li>
+            <li>wallet balance: CNY {{info.current_user.wallet.cny_balance}}</li>
+            <li>as a student:</li>
+            <ul>
+                <li>nickname: {{info.current_user.buyer.nickname}}</li>
+                <li>preferred language: {{info.current_user.buyer.mother_tongue.english_name|language_name}}</li>
+                <li>learning: {{info.current_user.buyer.sku_set.all|length}} courses</li>
+            </ul>
+            <li>as a tutor:</li>
+            <ul>
+                <li>stage name (for tutoring): {{info.current_user.provider.name}}</li>
+                <li>tutoring status: {{info.current_user.provider.get_status_display}}</li>
+                <li>tutoring: {{info.current_user.provider.sku_set.all|length}} courses</li>
+            </ul>
+        </ul>
+        <h2>* {% trans "Tutoring courses" %}</h2>
+        <strong>As a tutor</strong>, you have {{info.current_user.provider.sku_set.all|length}} courses. With more courses comes greater pay :)
+        <table>
+            <thead>
+                <tr>
+                    <th>Topic</th>
+                    <th>Ready?</th>
+                    <th>ID</th>
+                    <th>Provider</th>
+                    <th>Status</th>
+                    <th>Has plan?</th>
+                    <th>Buyer</th>
+                    <th>Start time</th>
+                    <th>End time</th>
+                    <th>Created</th>
+                    <th>Modified</th>
+                    <th>Op</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sku in info.current_user.provider.sku_set.all|dictsort:"start_time" %}
+                <tr>
+                    <td><a href="{% url 'main:showsku' sku.id %}">{{sku.topic}}</a></td>
+                    {# <td><a href="{% url 'main:providerstartsku' %}">{% trans "start!" %}</a></td> #}
+                    {% if ready %}
+                        <td>Ready!</td>
+                    {% endif %}
+                    <td>{{sku.id}}</td>
+                    <td>{{sku.provider}}</td>
+                    <td>{{sku.status}}({{sku.get_status_display}})</td>
+                    <td>
+                        {% if sku.has_plan %}
+                            yes
+                        {% else %}
+                            <strong>NO</strong>
+                        {% endif %}
+                    </td>
+                    <td>{{sku.buyer.all|safeseq|join:", "}}</td>
+                    <td>{{sku.start_time|date:"Y-m-d H:i (e)"}}</td>
+                    <td>{{sku.end_time|date:"Y-m-d H:i (e)"}}</td>
+                    <td>{{sku.created|date:"Y-m-d H:i (e)"}}</td>
+                    <td>{{sku.modified|date:"Y-m-d H:i (e)"}}</td>
+                    <td>
+                        {% if sku.status == 1 %}
+                            <a href="{% url 'main:provider_cancel_sku' sku.id %}">[REFUSE]</a>
+                        {% elif sku.status == 4 %}
+                            <a href="{% url 'main:provider_cancel_sku' sku.id %}">[DROP]</a>     
+                        {% elif sku.status == 2 %}
+                            IN POOL                 
+                        {% endif %}
+                    </td>
+
+                </tr>
+                {% endfor%}
+            </tbody>
+        </table>
+        <h2>* <a href="{% url 'main:repickpool' %}">{% trans "Repick pool" %}</a></h2>
+
+{% endblock content %}

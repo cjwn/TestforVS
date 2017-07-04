@@ -1,0 +1,52 @@
+{% extends "main/base.html" %}
+{% load i18n %} 
+{% load tz %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_timezone as TIME_ZONE %}
+{% localtime on %}
+
+{% block title %}
+    {{heading}}
+{% endblock title %}
+
+{% block content %}
+    <h1>{{heading}}</h1>
+    <h2>Topic</h2>
+    <p>{{topic.name}}</p>
+    <h3>{% trans "description:" %}{{topic.desc}}</h3>
+    <p></p>
+    <p>================================</p>
+    <p>{{msg}}Time zone using in this page: {{TIME_ZONE}}</p>
+    <p>================================</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Provider</th>
+                    <th>Buyer</th>
+                    <th>Start time</th>
+                    <th>End time</th>
+                    <th>Created</th>
+                    <th>Modified</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sku in skus %}
+                <tr>
+                    <td><a href="{% url 'main:booksku' topic.id sku.id %}">{{sku.id}}</td>
+                    <td><a href="{% url 'main:booksku' topic.id sku.id %}">{{sku.provider}}</td>
+                    <td>{{sku.buyer.all|safeseq|join:", "}}</td>
+                    <td>{{sku.start_time|date:"Y-m-d H:i (e)"}}</td>
+                    <td>{{sku.end_time|date:"Y-m-d H:i (e)"}}</td>
+                    <td>{{sku.created|date:"Y-m-d H:i (e)"}}</td>
+                    <td>{{sku.modified|date:"Y-m-d H:i (e)"}}</td>
+                </tr>
+                {% endfor%}
+            </tbody>
+        </table>
+<p></p>
+<a href="{% url 'main:picktopic' %}">{% trans "Back to repick a topic" %}</a>
+<p></p>
+<a href="{% url 'main:home' %}">{% trans "Get back to home" %}</a>
+{% endblock content %}
+{% endlocaltime %}

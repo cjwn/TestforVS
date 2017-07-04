@@ -1,0 +1,111 @@
+{% extends "main/base.html" %}
+{% load i18n %} 
+{% load tz %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_timezone as TIME_ZONE %}
+
+{% block stylesheet %}
+<style>
+    i{color:gray;
+        font-size: small;}
+</style>
+{% endblock stylesheet %}
+
+{% block title %}
+    My Notifications
+{% endblock title %}
+
+{% block content %}
+    <h1>{% trans "My Notifications" %}</h1>
+    {% trans "messages in the air" %}
+        <h2>* User profile</h2>
+        <ul style="font-family:monospace;">
+            <li>login name: {{info.current_user.get_username}}</li>
+            <li>email: {{info.current_user.email}}</li>
+            <li>last login: {{info.current_user.last_login|date:"Y-m-d H:i:s (O)"}}</li>
+            <li>wallet balance: CNY {{info.current_user.wallet.cny_balance}}</li>
+            <li>as a student:</li>
+            <ul>
+                <li>nickname: {{info.current_user.buyer.nickname}}</li>
+                <li>preferred language: {{info.current_user.buyer.mother_tongue.english_name|language_name}}</li>
+                <li>learning: {{info.current_user.buyer.sku_set.all|length}} courses</li>
+            </ul>
+            <li>as a tutor:</li>
+            <ul>
+                <li>stage name (for tutoring): {{info.current_user.provider.name}}</li>
+                <li>tutoring status: {{info.current_user.provider.get_status_display}}</li>
+                <li>tutoring: {{info.current_user.provider.sku_set.all|length}} courses</li>
+            </ul>
+        </ul>
+        
+
+        <h2>* Your have {{info.unread_anotis|length}}  unread notifications</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for anoti in info.anotis %}
+                        <tr style="vertical-align:top;">
+                            <td style="font-weight:{% if anoti.read %}normal{% else %}bold{% endif %};color:{% if anoti.read %}black{% else %}red{% endif %};"><strong>[{% if anoti.read %}READ{% else %}UNREAD{% endif %}]</strong></td>
+                            <td>{{anoti.content|safe}}</td>
+                            <td><a href="{% url 'main:notification_go' anoti.id %}">&lt;GO&gt;</a></td>
+
+                        </tr>
+                    {% endfor%}
+                </tbody>
+            </table>
+        {% if upcomming_anotis %}
+            <h2>* Your have {{upcomming_anotis|length}} upcomming notifications</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for anoti in upcomming_anotis %}
+                            <tr style="vertical-align:top;font-weight:{% if anoti.read %}normal{% else %}bold{% endif %};">
+                                <td style="color:{% if anoti.read %}black{% else %}red{% endif %};"><strong>[{% if anoti.read %}READ{% else %}UNREAD{% endif %}]</strong></td>
+                                <td>{{anoti.content|safe}}, will start at {{anoti.open_time}}</td>
+                                <td><a href="{% url 'main:notification_go' anoti.id %}">&lt;GO&gt;</a></td>
+
+                            </tr>
+                        {% endfor%}
+                    </tbody>
+                </table>
+        {% endif %}
+        {% if past_anotis %}
+            <h2>* Your have {{past_anotis|length}} past notifications, and they are invalid.</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for anoti in past_anotis %}
+                            <tr style="vertical-align:top;font-weight:{% if anoti.read %}normal{% else %}bold{% endif %};">
+                                <td style="color:{% if anoti.read %}black{% else %}red{% endif %};"><strong>[{% if anoti.read %}READ{% else %}UNREAD{% endif %}]</strong></td>
+                                <td>{{anoti.content|safe}}, closed at {{anoti.close_time}}</td>
+                                <td><a href="{% url 'main:notification_go' anoti.id %}">&lt;GO&gt;</a></td>
+
+                            </tr>
+                        {% endfor%}
+                    </tbody>
+                </table>
+        {% endif %}
+
+
+{% endblock content %}

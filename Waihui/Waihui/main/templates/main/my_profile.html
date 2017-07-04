@@ -1,0 +1,91 @@
+{% extends "main/base.html" %}
+{% load i18n %} 
+{% load tz %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_timezone as TIME_ZONE %}
+{% localtime on %}
+{% block title %}
+    {{heading}}
+{% endblock title %}
+{% block content %}
+    <p><a href="{% url 'main:edit_profile' %}">============={% trans "edit" %}==============</a></p>
+    {% if provider.avatar %}
+        <a href="{% url 'main:provider_avatar' %}">
+            <img src="{{provider.avatar.url}}" width="100px" alt=""> (need a new avatar?)
+        </a>
+    {% else %}
+        <a href="{% url 'main:provider_avatar' %}">
+            (Upload an avatar)
+        </a>
+    {% endif %}
+    <p>
+        Video:[{{provider.video}}]
+    </p>
+    <img src="" alt="">
+    <p>
+        {{provider.name}}
+    </p>
+    <p>
+        熟悉语言：{{provider.teaching_language.all|safeseq|join:", "}}
+    </p>
+    <p>
+        已教课时：{{finished_skus_count}}
+    </p>
+    <p>
+        学生评价：
+    </p>
+    <p>
+        {{provider.bio}}
+    </p>
+    {{provider.name}}老师可教课的时间
+    <table>
+            <thead>
+                <tr>
+                    <th>Topic</th>
+                    <th>Timeflag</th>
+                    <th>ID</th>
+                    <th>Provider</th>
+                    <th>Status</th>
+                    <th>Has plan?</th>
+                    <th>Buyer</th>
+                    <th>Start time</th>
+                    <th>End time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sku in skus|dictsort:"start_time" %}
+                <tr>
+                    <td><a href="{% url 'main:showsku' sku.id %}">{{sku.topic}}</a></td>
+                    {# <td><a href="{% url 'main:providerstartsku' %}">{% trans "start!" %}</a></td> #}
+                    <td>
+                        {% if sku.is_start_later %}
+                            waiting...
+                        {% elif sku.is_start_soon %}
+                            <strong>SOON-countdown: <br/ >{{sku.time_to_start}}</strong>
+                        {% elif sku.is_should_in_progress%}
+                            NOW
+                        {% elif sku.is_past%}
+                            past
+                        {% endif %}
+                    </td>
+                    <td>{{sku.id}}</td>
+                    <td>{{sku.provider}}</td>
+                    <td>{{sku.status}}({{sku.get_status_display}})</td>
+                    <td>
+                        {% if sku.has_plan %}
+                            yes
+                        {% else %}
+                            <strong>NO</strong>
+                        {% endif %}
+                    </td>
+                    <td>{{sku.buyer.all|safeseq|join:", "}}</td>
+                    <td>{{sku.start_time|date:"Y-m-d H:i (e)"}}</td>
+                    <td>{{sku.end_time|date:"Y-m-d H:i (e)"}}</td>
+
+
+                </tr>
+                {% endfor%}
+            </tbody>
+        </table>
+{% endblock content %}
+{% endlocaltime %}

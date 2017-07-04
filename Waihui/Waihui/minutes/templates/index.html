@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}
+    页面导览
+{% endblock title %}
+
+{% block content %}
+    {% for entry in entrys %}
+        <h2><a href="{% url 'qrcode_show' entry.id %}">展示会议ID：{{entry.id}}二维码</a></h2>
+        <h2><a href="{% url 'trysqrcode_show' entry.id %}">展示会议ID：{{entry.id}}测试二维码</a></h2>
+    {% endfor %}
+{% endblock content %}

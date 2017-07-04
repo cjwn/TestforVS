@@ -1,0 +1,42 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+        <title>{% block title %}{% trans "SilkyChinese" %}{% endblock %}</title>
+        <script type="text/javascript" src="/static/js/jquery.js"></script>
+        {% block javascript %}{% endblock javascript %}
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+        {% block stylesheet %}{% endblock stylesheet %}
+        {% block head %}{% endblock head %}
+</head>
+
+<body style="font-family:serif;">
+    {% if info.is_login %}
+    <a href="{% url 'main:home' %}">{% trans "Home" %}</a> |
+    [{{info.current_user.buyer.nickname}}{% trans ", welcome back!" %}] |
+    <a href="{% url 'main:notifications' %}">{% trans "Notifications" %}({{info.unread_anotis|length}})</a> |
+    <a href="{% url 'main:dashboard' %}">{% trans "Dashboard" %}</a> |
+    {% if info.is_provider %}
+    <a href="{% url 'main:self_profile' %}">{% trans "Profile" %}</a> |
+    {% endif %}
+    <a href="{% url 'main:office' %}">{% trans "Office" %}</a> |
+    <a href="{% url 'main:logout' %}">{% trans "Logout" %}</a>
+    {% else %}
+    <a href="{% url 'main:home' %}">{% trans "Home" %}</a> |
+     [Not loged in]
+    <a href="{% url 'main:login' %}">{% trans "Login" %}</a> |
+    <a href="{% url 'main:signup' %}">{% trans "Signup" %}</a>    
+    {% endif %}
+    <hr>
+    {% block content %}
+    {% endblock content %}
+
+    <hr>
+    <h2>* {% trans "Roadmap" %}</h2>
+    <p> <a href="{% url 'main:home' %}">{% trans "index" %}</a>|-->|<a href="{% url 'main:picktopic' %}">{% trans "话题大类（选择话题）" %}</a>|-->|话题（选择时间及教师）{默认选择ID号最小的话题}|-->|确认余额支付or余额不足（充值，第三方支付）|-->|订单完成| </p>
+
+</body>
+
+</html>

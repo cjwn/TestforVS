@@ -1,0 +1,61 @@
+{% extends "main/base.html" %}
+{% load i18n %} 
+{% get_current_language as LANGUAGE_CODE %}
+{% block title %}
+    {{heading}}
+{% endblock title %}
+
+{% block content %}
+    <h1>{{heading}}</h1>
+    <p>================================</p>
+    <p>{{msg}}</p>
+    <p>================================</p>
+    <h2><strong>This order has {{order.skus.all|length}} sku</strong></h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Topic</th>
+                    <th>Status</th> 
+                    <th>Provider</th>
+                    <th>Buyer</th>
+                    <th>Start time</th>
+                    <th>End time</th>
+                    <th>Created</th>
+                    <th>Modified</th>
+                </tr>
+            </thead>
+            <tbody>
+    {% for sku in order.skus.all %}
+                <tr>
+                    <td>{{topic}}</td>
+                    <td>{{sku.status}}({{sku.get_status_display}})</td>
+                    <td>{{sku.provider}}</td>
+                    <td>{{sku.buyer.all}}</td>
+                    <td>{{sku.start_time}}</td>
+                    <td>{{sku.end_time}}</td>
+                    <td>{{sku.created}}</td>
+                    <td>{{sku.modified}}</td>
+                </tr>
+    {% endfor %}
+            </tbody>
+        </table>
+    
+    <h2>Cost</h2>
+    <strong>
+        <p>* {% trans "Price: " %}{{order.cny_price}}</p>
+        <p>* {% trans "Your balance: " %}{{current_user.wallet.cny_balance}}</p>
+    </strong>
+
+    {% if order.status == 1 %}
+        <h1>
+            <a href="{% url 'main:orderpaid' order.id %}">Pay!</a> 
+            {# <a href="">Pay!</a> #}
+            <a href="{% url 'main:ordercancel' order.id %}">Cancel</a>
+        </h1>
+    {% endif %}
+
+    <script type="text/javascript">
+        var List = {{skus_topic|safe}};
+    </script>
+
+{% endblock content %}

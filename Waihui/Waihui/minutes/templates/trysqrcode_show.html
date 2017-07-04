@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}
+    {{entry.title}}
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="page-header">
+                <h1>{{ entry.title }} <br/> <small>{{ entry.start_time }}</small></h1>
+            </div>
+            <p>fx:{{appid}},{{secret}}
+            </p>
+            <div class="well">
+                <h2>{{result}}</h2>
+                <p>会议时间：{{ entry.start_time }} - {{ entry.end_time }}</p>
+                <p>与会人员：{{ entry.attendees_user.all }}<p>
+                <p>纪要编制：{{ entry.creator}} </p>
+            </div>
+            <h2>会议议程</h2>
+                {{entry.content_A|safe}}
+            <h2>会议纪要</h2>
+                {{entry.content_B|safe}}
+            <h2>下一步工作安排</h2>
+                {{entry.content_C|safe}}
+        </div>
+        <div class="col-md-4">
+                <img src="{{qr}}http://{{request.META.HTTP_HOST}}{% url 'trysqr_jumper' entry_id%}"  alt="扫一扫" width="100%"/>
+        </div> 
+    </div>
+</div>
+{% endblock content %}

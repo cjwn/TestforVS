@@ -1,0 +1,62 @@
+{% extends "main/base.html" %}
+{% load i18n %} 
+{% load tz %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_timezone as TIME_ZONE %}
+
+{% block title %}
+    My Repick pool
+{% endblock title %}
+
+{% block content %}
+    <h1>{% trans "My Repick pool" %}</h1>
+    <p>=========================================</p>
+    <p>{{msg}}</p>
+    <p>=========================================</p>
+    {% if skus %}
+        
+
+    <h2>{% trans "It contains courses which the teacher couldn't get it on time" %}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Topic</th>
+                    <th>ID</th>
+                    <th>Has plan?</th>
+                    <th>Buyer</th>
+                    <th>Start time</th>
+                    <th>End time</th>
+                    <th>Created</th>
+                    <th>Modified</th>
+                    <th>Op</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sku in skus %}
+                <tr>
+                    <td><a href="{% url 'main:showsku' sku.id %}">{{sku.topic}}</a></td>
+                    <td>{{sku.id}}</td>
+                    <td>
+                        {% if sku.has_plan %}
+                            yes
+                        {% else %}
+                            <strong>NO</strong>
+                        {% endif %}
+                    </td>
+                    <td>{{sku.buyer.all|safeseq|join:", "}}</td>
+                    <td>{{sku.start_time|date:"Y-m-d H:i (e)"}}</td>
+                    <td>{{sku.end_time|date:"Y-m-d H:i (e)"}}</td>
+                    <td>{{sku.created|date:"Y-m-d H:i (e)"}}</td>
+                    <td>{{sku.modified|date:"Y-m-d H:i (e)"}}</td>
+                    <td>
+                        <a href="{% url 'main:provider_repick' sku.id%}">[Repick]</a>
+                    </td>
+
+                </tr>
+                {% endfor%}
+            </tbody>
+        </table>
+    {% else %}
+    <h2>{% trans "No course to pickup" %}</h2>
+    {% endif %}
+{% endblock content %}

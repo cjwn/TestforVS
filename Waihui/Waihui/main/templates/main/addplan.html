@@ -1,0 +1,26 @@
+{% extends "main/base.html" %}
+{% load i18n %} 
+{% get_current_language as LANGUAGE_CODE %}
+{% block title %}
+    {{heading}}
+{% endblock title %}
+
+{% block content %}
+    <h1>{{heading}}</h1>
+    {% trans "This content for adding a plan to sku." %}
+    <p>================================</p>
+    <ul>
+        <li>{{msg}}</li>
+        <li>Go back to SKU <a href="{% url 'main:showsku' sku.id %}">#{{sku.id}}</a></li>
+    </ul>
+    <p>================================</p>
+    {% if msg != 'no' %}
+    <form method="post" enctype="multipart/form-data" action="">
+        {{uf.as_p}}
+        {% csrf_token %}
+        <input type="submit" name="submit">
+    </form>
+    {% else %}
+    <p>你不是这节课的老师，你不能备课。</p>
+    {% endif %}
+{% endblock content %}
